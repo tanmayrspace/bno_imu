@@ -1,0 +1,18 @@
+name: publish
+on: [push]
+jobs:
+bno_imu:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v2
+- name: Login to GitHub Container Registry
+uses: docker/login-action@v1
+with:
+registry: ghcr.io
+username: ${{ github.actor }}
+password: ${{ secrets.GITHUB_TOKEN }}
+- name: Build the bno_imu image
+run: |
+       docker build . --tag ghcr.io/tanmayrspace/bno_imu:latest
+       docker run ghcr.io/tanmayrspace/bno_imu:latest
+       docker push ghcr.io/tanmayrspace/bno_imu:latest
