@@ -4,8 +4,6 @@ RUN apt-get update && apt-get install -y \
   ros-humble-ament-cmake\
   python3-pip python3-rosdep
 RUN pip3 install smbus serial
-RUN rosdep update
-RUN rosdep install src/
 WORKDIR /bno_imu
 ENV ROS_DOMAIN_ID=21
 COPY src/bno055/ ./src/
